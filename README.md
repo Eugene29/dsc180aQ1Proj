@@ -2,6 +2,6 @@
 TWO STEPS:
 Use git bash if you have windows.
 
-0. conda create -n geom python=3.9.5
+0. use my conda environment (you can try your own first if you have torch_geometric)
 1. `pip install -r requirements.txt`
 2. `. multiple_experiments.sh`
