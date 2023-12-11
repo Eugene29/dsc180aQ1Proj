@@ -51,15 +51,15 @@ with accelerator.main_process_first():
     elif dataset_name == "Enzymes":
         #### Enzymes ####
         dataset_name = "ENZYMES"
-        transform = T.AddRandomWalkPE(walk_length=17, attr_name='pe')
-    #     train_dataset = ZINC(path, subset=True, split='train', pre_transform=transform)
-        dataset = TUDataset(root=f"/tmp/{dataset_name}", name=f"{dataset_name}", pre_transform=transform)
-
+        # transform = T.AddRandomWalkPE(walk_length=17, attr_name='pe')
+        # train_dataset = ZINC(path, subset=True, split='train', pre_transform=transform)
+        # dataset = TUDataset(root=f"/tmp/{dataset_name}", name=f"{dataset_name}", pre_transform=transform)
+        dataset = TUDataset(root=f"/tmp/{dataset_name}", name=f"{dataset_name}")
 #         dataset = TUDataset(root=f"/tmp/{dataset_name}", name=f"{dataset_name}")
         dataset = dataset.shuffle()
         datasetlst = list(dataset)
         args = {
-            "epochs":750,
+            "epochs":1250,
             "batch_size":32,
             "dropout":0.2,
             "one_graph": False,
@@ -88,13 +88,14 @@ with accelerator.main_process_first():
     elif dataset_name == "IMDB":
         ###IMDB####
         dataset_name = "IMDB-BINARY"
-        transform = T.AddRandomWalkPE(walk_length=17, attr_name='pe')
-        dataset = TUDataset(root=f"/tmp/{dataset_name}", name=f"{dataset_name}", pre_transform=transform)
+        # transform = T.AddRandomWalkPE(walk_length=17, attr_name='pe')
+        dataset = TUDataset(root=f"/tmp/{dataset_name}", name=f"{dataset_name}")
+        # dataset = TUDataset(root=f"/tmp/{dataset_name}", name=f"{dataset_name}", pre_transform=transform)
         dataset = dataset.shuffle()
         datasetlst = list(dataset)
         feature_augmentation(datasetlst, features=False, dev=accelerator.device)
         args = {
-            "epochs":500,
+            "epochs":1250,
             "batch_size":32,
             "dropout":0.2,
             "one_graph": False,
@@ -119,16 +120,17 @@ with accelerator.main_process_first():
 
     elif dataset_name == "Peptides-func":
         ###IMDB####
-        transform = T.AddRandomWalkPE(walk_length=17, attr_name='pe')
+        # transform = T.AddRandomWalkPE(walk_length=17, attr_name='pe')
     #     dataset_name = "IMDB-BINARY"
     #     dataset_name = "Peptides-struct"
         dataset_name = "Peptides-func"
-        dataset = LRGBDataset(root=f"/tmp/{dataset_name}", name=f"{dataset_name}", pre_transform=transform)
+        dataset = LRGBDataset(root=f"/tmp/{dataset_name}", name=f"{dataset_name}")
+        # dataset = LRGBDataset(root=f"/tmp/{dataset_name}", name=f"{dataset_name}", pre_transform=transform)
         dataset = dataset.shuffle()
         datasetlst = list(dataset)
         feature_augmentation(datasetlst, features=True, dev=accelerator.device)
         args = {
-            "epochs":200,
+            "epochs":400,
             "batch_size":64,
             "dropout":0.1,
             "one_graph": False,
