@@ -1,8 +1,0 @@
-accelerate==0.24.1
-cupy_cuda12x==12.3.0
-matplotlib==3.8.1
-networkx==3.0
-numpy==1.22.1
-scipy==1.7.0
-
-torch_geometric==2.4.0
